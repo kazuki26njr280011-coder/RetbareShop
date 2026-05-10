@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cosmetic Key Shop | Minecraft Server</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html, body {
+    min-height: 100%;
+    font-family: 'Segoe UI', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif;
+    color: #fff;
+    overflow-x: hidden;
+  }
+
+  body {
+    background-image: url("https://www.genspark.ai/api/files/s/WcQq0gb0");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    position: relative;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(10, 0, 30, 0.85) 0%, rgba(20, 0, 50, 0.75) 50%, rgba(0, 10, 40, 0.85) 100%);
+    z-index: -1;
+  }
+
+  /* HEADER */
+  header {
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .logo {
+    font-size: 24px;
+    font-weight: bold;
+    background: linear-gradient(90deg, #ffd700, #ff4d6d, #9d4edd);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+    letter-spacing: 1px;
+  }
+
+  .header-info {
+    font-size: 14px;
+    color: #c0a0ff;
+  }
+
+  /* HERO */
+  .hero {
+    text-align: center;
+    padding: 80px 20px 60px;
+  }
+
+  .hero h1 {
+    font-size: clamp(36px, 6vw, 64px);
+    font-weight: 900;
+    background: linear-gradient(90deg, #ffd700 0%, #ff4d6d 25%, #c77dff 50%, #4cc9f0 75%, #ffd700 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine 4s linear infinite;
+    letter-spacing: 2px;
+    text-shadow: 0 0 60px rgba(199, 125, 255, 0.5);
+    margin-bottom: 20px;
+  }
+
+  @keyframes shine {
+    to { background-position: 200% center; }
+  }
+
+  .hero p {
+    font-size: clamp(14px, 2vw, 18px);
+    color: #e0d0ff;
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.7;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+  }
+
+  .hero .command-hint {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 24px;
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid #ffd700;
+    border-radius: 30px;
+    font-family: 'Courier New', monospace;
+    color: #ffd700;
+    font-weight: bold;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+  }
+
+  /* PRODUCTS */
+  .products {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 40px 20px 60px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+  }
+
+  .product-card {
+    position: relative;
+    background: linear-gradient(160deg, rgba(40, 10, 80, 0.85) 0%, rgba(15, 5, 40, 0.9) 100%);
+    border: 2px solid rgba(199, 125, 255, 0.4);
+    border-radius: 20px;
+    padding: 25px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  }
+
+  .product-card::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    border-radius: 20px;
+    padding: 2px;
+    background: linear-gradient(135deg, transparent, transparent);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    transition: background 0.4s;
+    pointer-events: none;
+  }
+
+  .product-card:hover {
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: 0 20px 60px rgba(199, 125, 255, 0.5), 0 0 80px rgba(255, 215, 0, 0.2);
+    border-color: #ffd700;
+  }
+
+  .product-card:hover::before {
+    background: linear-gradient(135deg, #ffd700, #ff4d6d, #c77dff, #4cc9f0);
+  }
+
+  .product-card.best-value {
+    border-color: rgba(255, 77, 109, 0.6);
+  }
+
+  .product-card.best-deal {
+    border-color: rgba(255, 215, 0, 0.6);
+  }
+
+  .badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    z-index: 5;
+    animation: badgePulse 2s ease-in-out infinite;
+  }
+
+  .badge.value {
+    background: linear-gradient(90deg, #ff4d6d, #c77dff);
+    color: #fff;
+    box-shadow: 0 0 20px rgba(255, 77, 109, 0.7);
+  }
+
+  .badge.deal {
+    background: linear-gradient(90deg, #ffd700, #ff8c00);
+    color: #000;
+    box-shadow: 0 0 25px rgba(255, 215, 0, 0.8);
+  }
+
+  @keyframes badgePulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.08); }
+  }
+
+  .product-image-wrap {
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    border-radius: 14px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    background: rgba(0, 0, 0, 0.5);
+    position: relative;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6) inset;
+  }
+
+  .product-image-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+  }
+
+  .product-card:hover .product-image-wrap img {
+    transform: scale(1.05);
+  }
+
+  .product-title {
+    font-size: 26px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 8px;
+    color: #fff;
+    text-shadow: 0 0 12px rgba(199, 125, 255, 0.6);
+  }
+
+  .product-price {
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    color: #ffd700;
+    margin-bottom: 18px;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+  }
+
+  .product-price .coin-icon {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    background: radial-gradient(circle, #ffd700, #ff8c00);
+    border-radius: 50%;
+    vertical-align: middle;
+    margin-right: 6px;
+    box-shadow: 0 0 8px #ffd700;
+  }
+
+  .code-display {
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px dashed rgba(255, 215, 0, 0.5);
+    border-radius: 10px;
+    padding: 14px;
+    margin-bottom: 14px;
+    min-height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Courier New', monospace;
+    font-size: 15px;
+    color: #4cc9f0;
+    word-break: break-all;
+    text-align: center;
+    transition: all 0.3s;
+  }
+
+  .code-display.has-code {
+    color: #ffd700;
+    border-color: #ffd700;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.3) inset;
+  }
+
+  .code-display.empty {
+    color: #ff8080;
+    border-color: rgba(255, 80, 80, 0.5);
+    font-size: 13px;
+  }
+
+  .btn-group {
+    display: flex;
+    gap: 10px;
+  }
+
+  .btn {
+    flex: 1;
+    padding: 12px 10px;
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: inherit;
+    letter-spacing: 0.5px;
+  }
+
+  .btn-show {
+    background: linear-gradient(135deg, #4cc9f0, #7209b7);
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(114, 9, 183, 0.5);
+  }
+
+  .btn-show:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(114, 9, 183, 0.8);
+  }
+
+  .btn-copy {
+    background: linear-gradient(135deg, #ffd700, #ff8c00);
+    color: #000;
+    box-shadow: 0 4px 15px rgba(255, 140, 0, 0.5);
+  }
+
+  .btn-copy:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 140, 0, 0.8);
+  }
+
+  .btn-copy:disabled, .btn-show:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .btn-reset {
+    width: 100%;
+    margin-top: 10px;
+    background: linear-gradient(135deg, #ff4d6d, #c77dff);
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: inherit;
+    display: none;
+    transition: all 0.3s;
+  }
+
+  .btn-reset:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 77, 109, 0.6);
+  }
+
+  /* HOW TO USE */
+  .how-to {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 40px;
+    background: rgba(0, 0, 0, 0.55);
+    border-radius: 20px;
+    border: 1px solid rgba(199, 125, 255, 0.3);
+    backdrop-filter: blur(8px);
+  }
+
+  .how-to h2 {
+    font-size: 28px;
+    text-align: center;
+    margin-bottom: 30px;
+    background: linear-gradient(90deg, #ffd700, #c77dff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+  }
+
+  .step {
+    background: rgba(40, 10, 80, 0.5);
+    padding: 20px;
+    border-radius: 14px;
+    border-left: 4px solid #ffd700;
+    transition: transform 0.3s;
+  }
+
+  .step:hover {
+    transform: translateX(5px);
+  }
+
+  .step-num {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    background: linear-gradient(135deg, #ffd700, #ff4d6d);
+    color: #000;
+    border-radius: 50%;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .step h3 {
+    font-size: 16px;
+    margin-bottom: 8px;
+    color: #ffd700;
+  }
+
+  .step p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #e0d0ff;
+  }
+
+  .step code {
+    display: inline-block;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 2px 8px;
+    border-radius: 4px;
+    color: #4cc9f0;
+    font-family: 'Courier New', monospace;
+    margin-top: 4px;
+  }
+
+  /* NOTES */
+  .notes {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 30px;
+    background: rgba(50, 0, 0, 0.5);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 77, 109, 0.4);
+    backdrop-filter: blur(8px);
+  }
+
+  .notes h2 {
+    font-size: 22px;
+    margin-bottom: 18px;
+    color: #ff8080;
+  }
+
+  .notes ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .notes li {
+    padding: 8px 0 8px 28px;
+    position: relative;
+    color: #ffd0d0;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .notes li::before {
+    content: "⚠";
+    position: absolute;
+    left: 0;
+    color: #ffd700;
+  }
+
+  .small-note {
+    margin-top: 15px;
+    font-size: 11px;
+    color: #999;
+    font-style: italic;
+  }
+
+  /* TOAST */
+  .toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: linear-gradient(135deg, #ffd700, #ff8c00);
+    color: #000;
+    padding: 14px 30px;
+    border-radius: 30px;
+    font-weight: bold;
+    box-shadow: 0 8px 30px rgba(255, 215, 0, 0.6);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 1000;
+    pointer-events: none;
+  }
+
+  .toast.show {
+    transform: translateX(-50%) translateY(0);
+  }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 30px 20px;
+    color: #a090c0;
+    font-size: 13px;
+    border-top: 1px solid rgba(199, 125, 255, 0.2);
+    background: rgba(0, 0, 0, 0.4);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .products {
+      grid-template-columns: 1fr;
+      max-width: 420px;
+    }
+    header {
+      padding: 15px 20px;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .hero {
+      padding: 50px 20px 40px;
+    }
+    .how-to {
+      padding: 25px 20px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">⚔ Cosmetic Key Shop</div>
+  <div class="header-info">Minecraft Server | UltraCosmetics</div>
+</header>
+
+<section class="hero">
+  <h1>Cosmetic Key Shop</h1>
+  <p>Minecraft内で <strong>/code &lt;コード&gt;</strong> を入力してKeyを購入！<br>
+     UltraCosmeticsのKeyでガチャを回そう。</p>
+  <div class="command-hint">/code YOUR_CODE_HERE</div>
+</section>
+
+<section class="products" id="products"></section>
+
+<section class="how-to">
+  <h2>🎮 使い方</h2>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <h3>商品を選ぶ</h3>
+      <p>欲しいKeyの数量を選択し、「コードを表示」をクリック。</p>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <h3>コードをコピー</h3>
+      <p>表示された <code>/code XXXX</code> を「コピー」ボタンでコピー。</p>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <h3>サーバーで実行</h3>
+      <p>Minecraftサーバーに入り、チャットに貼り付けて実行。</p>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <h3>Keyを受け取る</h3>
+      <p>Vault残高から自動で支払われ、Keyが付与されます。</p>
+    </div>
+  </div>
+</section>
+
+<section class="notes">
+  <h2>注意事項</h2>
+  <ul>
+    <li>購入はMinecraft内で <strong>/code</strong> を実行した時点で処理されます。</li>
+    <li>コードはサーバー側で1回のみ使用可能です。</li>
+    <li>コードが既に使用済みの場合は別のコードを試してください。</li>
+    <li>所持金（Vault通貨）が不足している場合、購入に失敗する場合があります。</li>
+    <li>これはリアルマネー決済ではありません。すべてゲーム内通貨での購入です。</li>
+  </ul>
+  <p class="small-note">※ 表示済みコードはブラウザ内（localStorage）に記録されますが、完全な在庫管理ではありません。コードの実際の使用可否はサーバー側で判定されます。</p>
+</section>
+
+<footer>
+  © Minecraft Cosmetic Key Shop | Powered by UltraCosmetics & MPromoCodes
+</footer>
+
+<div class="toast" id="toast">✓ コピーしました！</div>
+
+<script>
+  const products = [
+    {
+      id: "key1",
+      title: "Cosmetic Key x1",
+      keys: 1,
+      price: 2000,
+      image: "https://www.genspark.ai/api/files/s/IcPpffwR",
+      badge: null,
+      cardClass: "",
+      codes: [
+        "KEY1_A7K9P2","KEY1_B4M8Q6","KEY1_C9N3R7","KEY1_D2P6T8","KEY1_E5R1W9",
+        "KEY1_F8T4Y2","KEY1_G1V7Z5","KEY1_H6X2A8","KEY1_J3B9C1","KEY1_K7D5E3",
+        "KEY1_L2F8G6","KEY1_M9H4J2","KEY1_N5K1L7","KEY1_P8M3N9","KEY1_Q1P6R4",
+        "KEY1_R7S2T8","KEY1_S4U9V1","KEY1_T6W3X5","KEY1_U2Y8Z6","KEY1_V9A5B3",
+        "KEY1_W1C7D9","KEY1_X8E2F4","KEY1_Y3G9H7","KEY1_Z6J1K5","KEY1_A4L8M2",
+        "KEY1_B9N3P6","KEY1_C2Q7R1","KEY1_D8S4T9","KEY1_E1U6V3","KEY1_F7W2X8",
+        "KEY1_G5Y9Z4","KEY1_H2A8B6","KEY1_J9C3D1","KEY1_K4E7F5","KEY1_L8G2H9",
+        "KEY1_M1J6K4","KEY1_N7L3M8","KEY1_P2N9Q5","KEY1_Q8R4S2","KEY1_R3T7U9"
+      ]
+    },
+    {
+      id: "key3",
+      title: "Cosmetic Key x3",
+      keys: 3,
+      price: 5000,
+      image: "https://www.genspark.ai/api/files/s/fsvVhuKd",
+      badge: { text: "お得！", className: "value" },
+      cardClass: "best-value",
+      codes: [
+        "KEY3_A8M2P6","KEY3_B1N7Q4","KEY3_C6P3R9","KEY3_D9Q5S2","KEY3_E2R8T7",
+        "KEY3_F7S1U5","KEY3_G4T9V3","KEY3_H1U6W8","KEY3_J8V2X6","KEY3_K3W7Y1",
+        "KEY3_L9X4Z8","KEY3_M5Y1A3","KEY3_N2Z8B7","KEY3_P7A4C9","KEY3_Q1B9D5",
+        "KEY3_R6C2E8","KEY3_S3D7F1","KEY3_T9E5G4","KEY3_U4F1H9","KEY3_V8G6J2",
+        "KEY3_W2H9K7","KEY3_X7J3L5","KEY3_Y1K8M3","KEY3_Z6L2N8","KEY3_A3M9P1",
+        "KEY3_B8N4Q6","KEY3_C2P7R9","KEY3_D7Q1S4","KEY3_E4R8T2","KEY3_F9S3U7",
+        "KEY3_G1T6V5","KEY3_H6U2W9","KEY3_J3V8X1","KEY3_K8W4Y7","KEY3_L2X9Z6"
+      ]
+    },
+    {
+      id: "key5",
+      title: "Cosmetic Key x5",
+      keys: 5,
+      price: 7500,
+      image: "https://www.genspark.ai/api/files/s/A0pxJ7GO",
+      badge: { text: "最もお得！", className: "deal" },
+      cardClass: "best-deal",
+      codes: [
+        "KEY5_A9P2X7","KEY5_B4Q8Y1","KEY5_C7R3Z9","KEY5_D1S6A4","KEY5_E8T2B6",
+        "KEY5_F3U9C2","KEY5_G6V1D8","KEY5_H2W7E5","KEY5_J9X4F1","KEY5_K5Y8G3",
+        "KEY5_L1Z3H7","KEY5_M8A6J2","KEY5_N4B1K9","KEY5_P7C9L4","KEY5_Q2D5M8",
+        "KEY5_R9E3N1","KEY5_S5F8P6","KEY5_T1G4Q2","KEY5_U8H7R9","KEY5_V3J2S5",
+        "KEY5_W6K9T1","KEY5_X2L5U8","KEY5_Y9M1V4","KEY5_Z4N8W6","KEY5_A7P3X2"
+      ]
+    }
+  ];
+
+  const STORAGE_PREFIX = "cosmetic_shop_used_";
+
+  function getUsedCodes(productId) {
+    try {
+      const data = localStorage.getItem(STORAGE_PREFIX + productId);
+      return data ? JSON.parse(data) : [];
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function addUsedCode(productId, code) {
+    try {
+      const used = getUsedCodes(productId);
+      if (!used.includes(code)) {
+        used.push(code);
+        localStorage.setItem(STORAGE_PREFIX + productId, JSON.stringify(used));
+      }
+    } catch (e) {}
+  }
+
+  function resetUsedCodes(productId) {
+    try {
+      localStorage.removeItem(STORAGE_PREFIX + productId);
+    } catch (e) {}
+  }
+
+  function pickRandomCode(product) {
+    const used = getUsedCodes(product.id);
+    const remaining = product.codes.filter(c => !used.includes(c));
+    if (remaining.length === 0) return null;
+    return remaining[Math.floor(Math.random() * remaining.length)];
+  }
+
+  function showToast(message) {
+    const toast = document.getElementById("toast");
+    toast.textContent = message;
+    toast.classList.add("show");
+    clearTimeout(showToast._t);
+    showToast._t = setTimeout(() => toast.classList.remove("show"), 2000);
+  }
+
+  function renderProducts() {
+    const grid = document.getElementById("products");
+    grid.innerHTML = "";
+
+    products.forEach(product => {
+      const card = document.createElement("div");
+      card.className = "product-card " + product.cardClass;
+
+      const badgeHtml = product.badge
+        ? `<div class="badge ${product.badge.className}">${product.badge.text}</div>`
+        : "";
+
+      card.innerHTML = `
+        ${badgeHtml}
+        <div class="product-image-wrap">
+          <img src="${product.image}" alt="${product.title}" loading="lazy">
+        </div>
+        <div class="product-title">${product.title}</div>
+        <div class="product-price"><span class="coin-icon"></span>${product.price.toLocaleString()} Coins</div>
+        <div class="code-display" id="code-${product.id}">コードはまだ表示されていません</div>
+        <div class="btn-group">
+          <button class="btn btn-show" data-action="show" data-id="${product.id}">コードを表示</button>
+          <button class="btn btn-copy" data-action="copy" data-id="${product.id}" disabled>コピー</button>
+        </div>
+        <button class="btn-reset" data-action="reset" data-id="${product.id}">表示済みコードをリセット</button>
+      `;
+
+      grid.appendChild(card);
+    });
+
+    grid.addEventListener("click", handleClick);
+  }
+
+  const currentCodes = {};
+
+  function handleClick(e) {
+    const btn = e.target.closest("button");
+    if (!btn) return;
+    const action = btn.dataset.action;
+    const id = btn.dataset.id;
+    const product = products.find(p => p.id === id);
+    if (!product) return;
+
+    if (action === "show") {
+      const code = pickRandomCode(product);
+      const display = document.getElementById("code-" + id);
+      const card = btn.closest(".product-card");
+      const copyBtn = card.querySelector('[data-action="copy"]');
+      const resetBtn = card.querySelector('[data-action="reset"]');
+
+      if (!code) {
+        display.textContent = "このブラウザでは全コードを表示済みです";
+        display.className = "code-display empty";
+        copyBtn.disabled = true;
+        resetBtn.style.display = "block";
+        currentCodes[id] = null;
+      } else {
+        const fullCommand = "/code " + code;
+        display.textContent = fullCommand;
+        display.className = "code-display has-code";
+        copyBtn.disabled = false;
+        resetBtn.style.display = "none";
+        currentCodes[id] = fullCommand;
+        addUsedCode(id, code);
+      }
+    } else if (action === "copy") {
+      const text = currentCodes[id];
+      if (!text) return;
+      copyToClipboard(text).then(success => {
+        if (success) {
+          const original = btn.textContent;
+          btn.textContent = "コピーしました！";
+          btn.disabled = true;
+          showToast("✓ コピーしました！ Minecraftで貼り付けてください");
+          setTimeout(() => {
+            btn.textContent = original;
+            btn.disabled = false;
+          }, 2000);
+        } else {
+          showToast("⚠ コピーに失敗しました");
+        }
+      });
+    } else if (action === "reset") {
+      resetUsedCodes(id);
+      const display = document.getElementById("code-" + id);
+      display.textContent = "コードはまだ表示されていません";
+      display.className = "code-display";
+      const card = btn.closest(".product-card");
+      card.querySelector('[data-action="copy"]').disabled = true;
+      btn.style.display = "none";
+      currentCodes[id] = null;
+      showToast("リセットしました");
+    }
+  }
+
+  function copyToClipboard(text) {
+    if (navigator.clipboard && window.isSecureContext) {
+      return navigator.clipboard.writeText(text).then(() => true).catch(() => fallbackCopy(text));
+    }
+    return Promise.resolve(fallbackCopy(text));
+  }
+
+  function fallbackCopy(text) {
+    try {
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      const ok = document.execCommand("copy");
+      document.body.removeChild(ta);
+      return ok;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  renderProducts();
+</script>
+
+</body>
+</html>
