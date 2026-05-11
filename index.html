@@ -22,7 +22,6 @@
     position: relative;
   }
 
-  /* 星空 */
   body::before {
     content: "";
     position: fixed;
@@ -45,9 +44,8 @@
     50% { opacity: 0.7; }
   }
 
-  /* HEADER */
   header {
-    padding: 20px 40px;
+    padding: 18px 40px;
     text-align: center;
     background: rgba(0, 0, 0, 0.5);
     border-bottom: 1px solid rgba(255, 215, 0, 0.3);
@@ -67,40 +65,37 @@
     letter-spacing: 1px;
   }
 
-  /* HERO */
+  /* HERO with title image */
   .hero {
     text-align: center;
-    padding: 60px 20px 40px;
+    padding: 50px 20px 30px;
   }
 
-  .hero h1 {
-    font-size: clamp(32px, 5.5vw, 56px);
-    font-weight: 900;
-    background: linear-gradient(90deg, #ffd700, #ff4d6d, #c77dff, #4cc9f0, #ffd700);
-    background-size: 200% auto;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: shine 4s linear infinite;
-    letter-spacing: 2px;
-    margin-bottom: 18px;
+  .title-image {
+    max-width: min(720px, 92%);
+    width: auto;
+    height: auto;
+    filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.5))
+            drop-shadow(0 0 60px rgba(199, 125, 255, 0.4));
+    animation: titleFloat 4s ease-in-out infinite;
   }
 
-  @keyframes shine {
-    to { background-position: 200% center; }
+  @keyframes titleFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
   }
 
   .hero p {
     font-size: clamp(14px, 1.8vw, 17px);
     color: #e0d0ff;
     max-width: 720px;
-    margin: 0 auto 16px;
+    margin: 24px auto 14px;
     line-height: 1.7;
   }
 
   .hero .command-hint {
     display: inline-block;
-    margin-top: 8px;
+    margin-top: 6px;
     padding: 10px 24px;
     background: rgba(0, 0, 0, 0.6);
     border: 1px solid #ffd700;
@@ -111,7 +106,7 @@
     box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
   }
 
-  /* 画像クリック商品エリア */
+  /* Products */
   .products {
     max-width: 1300px;
     margin: 0 auto;
@@ -168,7 +163,7 @@
     opacity: 1;
   }
 
-  /* MODAL */
+  /* Modal */
   .modal-overlay {
     position: fixed;
     inset: 0;
@@ -182,9 +177,7 @@
     animation: fadeIn 0.3s;
   }
 
-  .modal-overlay.show {
-    display: flex;
-  }
+  .modal-overlay.show { display: flex; }
 
   @keyframes fadeIn {
     from { opacity: 0; }
@@ -287,7 +280,6 @@
     background: rgba(255, 255, 255, 0.2);
   }
 
-  /* 購入完了モーダルの中身 */
   .code-box {
     background: #000;
     border: 2px dashed #ffd700;
@@ -313,22 +305,8 @@
     color: #e0f0ff;
   }
 
-  .step-instruction strong {
-    color: #4cc9f0;
-  }
+  .step-instruction strong { color: #4cc9f0; }
 
-  .copied-mark {
-    display: inline-block;
-    background: #00c853;
-    color: #fff;
-    padding: 3px 10px;
-    border-radius: 4px;
-    font-size: 12px;
-    margin-left: 8px;
-    font-weight: bold;
-  }
-
-  /* NOTES */
   .notes {
     max-width: 1100px;
     margin: 30px auto;
@@ -345,9 +323,7 @@
     color: #ff8080;
   }
 
-  .notes ul {
-    list-style: none;
-  }
+  .notes ul { list-style: none; }
 
   .notes li {
     padding: 7px 0 7px 28px;
@@ -371,7 +347,6 @@
     font-style: italic;
   }
 
-  /* TOAST */
   .toast {
     position: fixed;
     bottom: 30px;
@@ -392,7 +367,6 @@
     transform: translateX(-50%) translateY(0);
   }
 
-  /* FOOTER */
   footer {
     text-align: center;
     padding: 25px 20px;
@@ -402,7 +376,6 @@
     background: rgba(0, 0, 0, 0.4);
   }
 
-  /* RESPONSIVE */
   @media (max-width: 900px) {
     .products {
       grid-template-columns: 1fr;
@@ -410,7 +383,7 @@
       gap: 20px;
     }
     header { padding: 15px 20px; }
-    .hero { padding: 40px 20px 30px; }
+    .hero { padding: 30px 20px 20px; }
     .modal { padding: 25px 20px; }
     .modal h2 { font-size: 22px; }
   }
@@ -423,7 +396,7 @@
 </header>
 
 <section class="hero">
-  <h1>Cosmetic Key Shop</h1>
+  <img src="Titles.png" alt="Cosmetic Key Shop" class="title-image">
   <p>下の画像をクリックして購入！<br>表示されたコードをMinecraftサーバーで打ち込めばKeyがもらえます。</p>
   <div class="command-hint">/code YOUR_CODE_HERE</div>
 </section>
@@ -456,7 +429,6 @@
   © Minecraft Cosmetic Key Shop | Powered by UltraCosmetics & MPromoCodes
 </footer>
 
-<!-- 確認モーダル -->
 <div class="modal-overlay" id="confirmModal">
   <div class="modal">
     <h2>🛒 購入確認</h2>
@@ -470,7 +442,6 @@
   </div>
 </div>
 
-<!-- 完了モーダル -->
 <div class="modal-overlay" id="resultModal">
   <div class="modal">
     <h2>✅ コード発行完了！</h2>
@@ -562,7 +533,6 @@
     const product = products[id];
     const used = getUsedCodes(id);
     let remaining = product.codes.filter(c => !used.includes(c));
-    // 全部使い切った場合はリセットして再利用
     if (remaining.length === 0) {
       localStorage.removeItem(STORAGE_PREFIX + id);
       remaining = product.codes.slice();
@@ -599,7 +569,6 @@
     showToast._t = setTimeout(() => t.classList.remove("show"), 2000);
   }
 
-  // 画像クリック → 購入確認モーダル
   document.querySelectorAll(".product-card").forEach(card => {
     card.addEventListener("click", () => {
       const id = card.dataset.id;
@@ -611,13 +580,11 @@
     });
   });
 
-  // キャンセル
   document.getElementById("cancelBtn").addEventListener("click", () => {
     document.getElementById("confirmModal").classList.remove("show");
     currentProductId = null;
   });
 
-  // 購入確定 → コード発行 + 自動コピー + 結果モーダル
   document.getElementById("confirmBtn").addEventListener("click", () => {
     if (!currentProductId) return;
     const p = products[currentProductId];
@@ -632,7 +599,6 @@
     document.getElementById("confirmModal").classList.remove("show");
     document.getElementById("resultModal").classList.add("show");
 
-    // 自動でコピーを試みる
     copyToClipboard(currentCommand).then(success => {
       if (success) {
         document.getElementById("copiedNote").style.display = "block";
@@ -641,7 +607,6 @@
     });
   });
 
-  // もう一度コピー
   document.getElementById("recopyBtn").addEventListener("click", () => {
     if (!currentCommand) return;
     copyToClipboard(currentCommand).then(success => {
@@ -654,14 +619,12 @@
     });
   });
 
-  // 結果モーダル閉じる
   document.getElementById("closeResultBtn").addEventListener("click", () => {
     document.getElementById("resultModal").classList.remove("show");
     currentCommand = null;
     currentProductId = null;
   });
 
-  // オーバーレイクリックで閉じる
   document.querySelectorAll(".modal-overlay").forEach(o => {
     o.addEventListener("click", e => {
       if (e.target === o) o.classList.remove("show");
